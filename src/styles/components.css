@@ -1,0 +1,140 @@
+/* Header */
+.header {
+  width: 100%;
+  box-sizing: border-box;
+  background: #1C12B1;
+  color: white;
+  padding: 20px 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-logo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.header-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+  opacity: 0.85;
+}
+
+/* Botones */
+.btn-primary,
+.button-primary {
+  background: #1C12B1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover,
+.button-primary:hover {
+  opacity: 0.9;
+}
+
+.movie-card,
+.food-card,
+.other-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover,
+.food-card:hover,
+.other-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Películas: posters más grandes para apreciar mejor (proporción 2:3 típica de carteles) */
+.movie-card img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  background: #e8e8e8;
+}
+
+/* Alimentos y otros: tamaño intermedio */
+.food-card img,
+.other-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  background: #e8e8e8;
+}
+
+.movie-content,
+.food-content,
+.other-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.movie-content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.food-content h4,
+.other-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.food-content p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1C12B1;
+}
+
+/* Secciones de Alimentos */
+.food-section {
+  margin-bottom: 40px;
+}
+
+.food-section:last-child {
+  margin-bottom: 0;
+}
+
+.food-category {
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1C12B1;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1C12B1;
+}

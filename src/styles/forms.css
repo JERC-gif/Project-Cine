@@ -1,0 +1,42 @@
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: white;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 54, 209, 0.2);
+  background: #32324a;
+}
+
+input::placeholder {
+  color: #888;
+}
+
+.confirmacion {
+  background: #2a2a3a;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  border-left: 4px solid #4caf50;
+}
+
+.confirmacion p {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.confirmacion p:first-child {
+  color: #4caf50;
+  font-weight: bold;
+}

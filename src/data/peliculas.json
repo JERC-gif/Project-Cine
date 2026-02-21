@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "titulo": "El Padrino",
+    "imagen": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",
+    "sinopsis": "La historia sigue a la poderosa familia Corleone, una dinastía mafiosa en Nueva York. Cuando el patriarca es atacado, su hijo Michael se ve obligado a involucrarse en el oscuro mundo del crimen, enfrentando decisiones que cambiarán su vida y el destino de su familia."
+  },
+  {
+    "id": 2,
+    "titulo": "The Matrix",
+    "imagen": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    "sinopsis": "Neo, un joven programador, descubre que el mundo que conoce es en realidad una simulación creada por máquinas. Con la ayuda de un grupo rebelde, deberá despertar a la verdad."
+  },
+  {
+    "id": 3,
+    "titulo": "Interestelar",
+    "imagen": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "sinopsis": "En un futuro donde la Tierra está al borde del colapso, un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad."
+  },
+  {
+    "id": 4,
+    "titulo": "Parásitos",
+    "imagen": "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_FMjpg_UX1000_.jpg",
+    "sinopsis": "Una familia con dificultades económicas encuentra la manera de infiltrarse en el hogar de una familia adinerada. Lo que comienza como una oportunidad se transforma en una crítica intensa sobre las diferencias sociales."
+  },
+  {
+    "id": 5,
+    "titulo": "Titanic",
+    "imagen": "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+    "sinopsis": "Durante el viaje inaugural del Titanic, Jack y Rose viven una historia de amor imposible entre clases sociales distintas, mientras el famoso barco se enfrenta a una tragedia histórica."
+  },
+  {
+    "id": 6,
+    "titulo": "Forrest Gump",
+    "imagen": "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg",
+    "sinopsis": "Forrest, un hombre con una visión simple pero sincera de la vida, termina participando en algunos de los eventos más importantes de la historia moderna de Estados Unidos."
+  },
+  {
+    "id": 7,
+    "titulo": "El Rey León",
+    "imagen": "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+    "sinopsis": "Simba, un joven león heredero del trono, deberá enfrentar su pasado y asumir su responsabilidad como rey después de la traición que cambia el destino de su familia."
+  },
+  {
+    "id": 8,
+    "titulo": "Coco",
+    "imagen": "https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg",
+    "sinopsis": "Miguel, un niño apasionado por la música, viaja accidentalmente al mundo de los muertos donde descubrirá la verdadera historia de su familia y el valor de recordar a quienes ya no están."
+  }
+]

@@ -6,7 +6,7 @@ function OtherCard({ title, image }) {
         <h4>{title}</h4>
       </div>
     </div>
-  )
+  );
 }
 
-export default OtherCard
+export default OtherCard;

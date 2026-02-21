@@ -1,37 +1,43 @@
-import MovieCard from "../components/MovieCard"
+import { useState } from "react";
+import peliculas from "../data/peliculas.json";
+import MovieCard from "../components/MovieCard";
 
-function Cartelera({ cambiarVista }) {
+function Cartelera({ verDetalle, favoritos, toggleFavorito }) {
+  const [busqueda, setBusqueda] = useState("");
+
+  const filtradas = peliculas.filter((p) =>
+    p.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div className="container">
       <h2>Cartelera</h2>
 
+      <input
+        type="text"
+        placeholder="Buscar película..."
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="search-input"
+        style={{ width: "100%", maxWidth: "500px", margin: "0 auto 30px", display: "block" }}
+      />
+
       <div className="grid">
-        <MovieCard
-          title="El Padrino"
-          image="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg"
-          onVerDetalle={() => cambiarVista("detalle")}
-        />
-
-        <MovieCard
-          title="Pulp Fiction"
-          image="https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzMjMjEstZGU2NzYxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg"
-          onVerDetalle={() => cambiarVista("detalle")}
-        />
-
-        <MovieCard
-          title="Interestelar"
-          image="https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg"
-          onVerDetalle={() => cambiarVista("detalle")}
-        />
-
-        <MovieCard
-          title="Parásitos"
-          image="https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_FMjpg_UX1000_.jpg"
-          onVerDetalle={() => cambiarVista("detalle")}
-        />
+        {filtradas.map((p) => (
+          <MovieCard
+            key={p.id}
+            id={p.id}
+            title={p.titulo}
+            image={p.imagen}
+            sinopsis={p.sinopsis}
+            onVerDetalle={() => verDetalle(p)}
+            favoritos={favoritos}
+            toggleFavorito={toggleFavorito}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Cartelera
+export default Cartelera;

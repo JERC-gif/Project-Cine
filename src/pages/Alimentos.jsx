@@ -1,4 +1,4 @@
-import FoodCard from "../components/FoodCard"
+import FoodCard from "../components/FoodCard";
 
 function Alimentos() {
   return (
@@ -53,7 +53,7 @@ function Alimentos() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default Alimentos
+export default Alimentos;

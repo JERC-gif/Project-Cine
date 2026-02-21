@@ -7,7 +7,7 @@ function FoodCard({ name, price, image }) {
         <p>{price}</p>
       </div>
     </div>
-  )
+  );
 }
 
-export default FoodCard
+export default FoodCard;

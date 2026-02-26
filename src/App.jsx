@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Cartelera from "./pages/Cartelera";
@@ -10,6 +10,14 @@ function App() {
   const [vista, setVista] = useState("home");
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
   const [favoritos, setFavoritos] = useState([]);
+  const [peliculas, setPeliculas] = useState([]);
+
+  useEffect(() => {
+    fetch("/data/peliculas.json")
+      .then((res) => res.json())
+      .then((data) => setPeliculas(data))
+      .catch((err) => console.error("Error cargando películas:", err));
+  }, []);
 
   const verDetalle = (pelicula) => {
     setPeliculaSeleccionada(pelicula);
@@ -30,16 +38,18 @@ function App() {
 
       {vista === "home" && (
         <Home 
+          peliculas={peliculas}
           verDetalle={verDetalle} 
           favoritos={favoritos} 
-          toggleFavorito={toggleFavorito} 
+          toggleFavorito={toggleFavorito}
         />
       )}
       {vista === "cartelera" && (
         <Cartelera 
+          peliculas={peliculas}
           verDetalle={verDetalle} 
           favoritos={favoritos} 
-          toggleFavorito={toggleFavorito} 
+          toggleFavorito={toggleFavorito}
         />
       )}
       {vista === "detalle" && (

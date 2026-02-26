@@ -1,8 +1,7 @@
 import { useState } from "react";
-import peliculas from "../data/peliculas.json";
 import MovieCard from "../components/MovieCard";
 
-function Cartelera({ verDetalle, favoritos, toggleFavorito }) {
+function Cartelera({ peliculas, verDetalle, favoritos, toggleFavorito }) {
   const [busqueda, setBusqueda] = useState("");
 
   const filtradas = peliculas.filter((p) =>

@@ -20,33 +20,20 @@ function Detalle({ pelicula, cambiarVista }) {
     <div className="container">
       <h2>{pelicula.titulo}</h2>
 
-      <div className="card" style={{ flexDirection: "row", alignItems: "flex-start" }}>
+      <div className="card detalle-card">
         {!imgError ? (
           <img
             src={pelicula.imagen}
             alt={pelicula.titulo}
             onError={() => setImgError(true)}
-            style={{ width: "300px", height: "450px", objectFit: "cover", borderRadius: "12px 0 0 12px" }}
+            className="detalle-poster"
           />
         ) : (
-          <div style={{
-            width: "300px",
-            height: "450px",
-            background: "linear-gradient(135deg, #3b36d1, #1a1a2e)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-            fontWeight: "bold",
-            fontSize: "1.8rem",
-            textAlign: "center",
-            padding: "20px",
-            borderRadius: "12px 0 0 12px"
-          }}>
+          <div className="detalle-poster detalle-poster-placeholder">
             🎬 {pelicula.titulo}
           </div>
         )}
-        <div className="card-content" style={{ flex: 1, padding: "30px" }}>
+        <div className="card-content detalle-content">
           <p style={{ fontSize: "1.2rem", lineHeight: "1.8", color: "#e0e0e0" }}>
             {pelicula.sinopsis}
           </p>

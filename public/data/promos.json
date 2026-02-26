@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "2x1 en boletos",
+    "descripcion": "Todos los martes, lleva a un amigo gratis. Aplica para funciones 2D y 3D.",
+    "imagen": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600"
+  },
+  {
+    "id": 2,
+    "titulo": "Combo familiar",
+    "descripcion": "2 refrescos + 1 palomitas gigantes + 2 hot dogs por solo $199.",
+    "imagen": "https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&w=600"
+  },
+  {
+    "id": 3,
+    "titulo": "Miércoles de dulces",
+    "descripcion": "50% de descuento en todos los dulces y golosinas.",
+    "imagen": "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600"
+  },
+  {
+    "id": 4,
+    "titulo": "Preventa exclusiva",
+    "descripcion": "Compra tus boletos para los estrenos con 3 días de anticipación y llévate un póster.",
+    "imagen": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"
+  }
+]

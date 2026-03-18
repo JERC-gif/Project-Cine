@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
-function Cartelera({ peliculas, verDetalle, favoritos, toggleFavorito }) {
+function Cartelera({ peliculas = [], favoritos, toggleFavorito }) {
+  const navigate = useNavigate();
   const [busqueda, setBusqueda] = useState("");
 
   const filtradas = peliculas.filter((p) =>
@@ -29,7 +31,7 @@ function Cartelera({ peliculas, verDetalle, favoritos, toggleFavorito }) {
             title={p.titulo}
             image={p.imagen}
             sinopsis={p.sinopsis}
-            onVerDetalle={() => verDetalle(p)}
+            onVerDetalle={() => navigate(`/pelicula/${p.id}`)}
             favoritos={favoritos}
             toggleFavorito={toggleFavorito}
           />

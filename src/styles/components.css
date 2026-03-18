@@ -48,7 +48,8 @@
   flex: 1;
 }
 
-button {
+button,
+a.btn {
   background: var(--primary);
   border: none;
   padding: 10px 20px;
@@ -59,6 +60,12 @@ button {
   transition: var(--transition);
   border: 1px solid transparent;
   font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a.btn:hover {
+  color: white;
 }
 
 button:hover {
@@ -67,13 +74,16 @@ button:hover {
   box-shadow: 0 5px 15px rgba(59, 54, 209, 0.4);
 }
 
-button.btn-secondary {
+button.btn-secondary,
+a.btn.btn-secondary {
   background: var(--secondary);
 }
 
-button.btn-secondary:hover {
+button.btn-secondary:hover,
+a.btn.btn-secondary:hover {
   background: var(--secondary-hover);
   box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+  color: white;
 }
 
 .food-card {

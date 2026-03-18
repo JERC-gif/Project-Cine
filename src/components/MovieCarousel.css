@@ -1,0 +1,197 @@
+.movie-carousel-section {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.carousel-header {
+  padding: 0 5% 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.carousel-title {
+  font-size: 1.75rem;
+}
+
+.carousel-title::after {
+  display: block;
+}
+
+.carousel-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-tab {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 15, 26, 0.7);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.carousel-tab:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.carousel-tab.active {
+  background: #ffffff;
+  color: var(--primary);
+  border-color: #ffffff;
+}
+
+.movie-carousel {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+}
+
+.movie-carousel .swiper-wrapper {
+  align-items: stretch;
+}
+
+.movie-carousel .swiper-slide {
+  height: 420px;
+}
+
+.carousel-slide-link {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.carousel-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #070712;
+  transition: transform 0.8s ease;
+}
+
+.carousel-slide-link:hover .carousel-slide-bg {
+  transform: scale(1.06);
+}
+
+.carousel-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 15, 26, 0.95) 0%,
+    rgba(15, 15, 26, 0.4) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.carousel-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 5%;
+  z-index: 1;
+}
+
+.carousel-slide-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.carousel-slide-subtitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  color: var(--text-gray);
+}
+
+.carousel-slide-link:hover .carousel-slide-title {
+  transform: translateY(-2px);
+}
+
+.carousel-slide-cta {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--secondary);
+  font-size: 1rem;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-slide-link:hover .carousel-slide-cta {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Botones de navegación Swiper */
+.movie-carousel .swiper-button-prev,
+.movie-carousel .swiper-button-next {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(15, 15, 26, 0.7);
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.movie-carousel .swiper-button-prev:hover,
+.movie-carousel .swiper-button-next:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.08);
+}
+
+.movie-carousel .swiper-button-prev {
+  left: 16px;
+}
+
+.movie-carousel .swiper-button-next {
+  right: 16px;
+}
+
+.movie-carousel .swiper-button-prev::after,
+.movie-carousel .swiper-button-next::after {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .movie-carousel .swiper-slide {
+    height: 320px;
+  }
+
+  .carousel-slide-title {
+    font-size: 1.5rem;
+  }
+
+  .movie-carousel .swiper-button-prev,
+  .movie-carousel .swiper-button-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .movie-carousel .swiper-button-prev {
+    left: 8px;
+  }
+
+  .movie-carousel .swiper-button-next {
+    right: 8px;
+  }
+}

@@ -1,0 +1,166 @@
+/* Navbar principal */
+.navbar {
+  background: var(--primary);
+  padding: 14px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: white;
+  transition: var(--transition);
+  background: linear-gradient(135deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Enlaces y botón dropdown */
+.navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  color: white;
+}
+
+/* Estado activo (página actual) */
+.navbar-nav .nav-link.active {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary);
+  border-color: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-nav .nav-link.active:hover {
+  background: white;
+  color: var(--primary-hover);
+}
+
+/* Dropdown "Películas" */
+.nav-dropdown-wrap {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.dropdown-arrow {
+  font-size: 0.65em;
+  opacity: 0.9;
+  transition: transform 0.25s ease;
+}
+
+.nav-dropdown-trigger.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 6px 0 0;
+  min-width: 220px;
+  padding: 8px 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  z-index: 100;
+}
+
+.nav-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown li {
+  margin: 0;
+}
+
+.nav-dropdown-link {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.nav-dropdown-link:hover {
+  background: rgba(59, 54, 209, 0.25);
+  border-left-color: var(--primary);
+  color: white;
+}
+
+.nav-dropdown-link.active {
+  background: rgba(59, 54, 209, 0.4);
+  border-left-color: var(--secondary);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    gap: 4px;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .nav-dropdown {
+    min-width: 200px;
+  }
+}

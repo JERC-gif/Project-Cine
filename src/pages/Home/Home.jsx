@@ -1,16 +1,22 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
-import MovieCarousel from "../components/MovieCarousel";
+import { MovieCard, MovieCarousel } from "../../components";
+import { getPromos } from "../../services/contentService";
+import styles from "./Home.module.css";
 
 function Home({ peliculas, favoritos, toggleFavorito }) {
   const navigate = useNavigate();
   const [promos, setPromos] = useState([]);
-  const peliculasDestacadas = peliculas?.slice(0, 4) || [];
+  const peliculasDestacadas = useMemo(() => peliculas?.slice(0, 4) || [], [peliculas]);
+  const favoritas = useMemo(
+    () => (peliculas || []).filter((pelicula) => favoritos.includes(pelicula.id)),
+    [peliculas, favoritos],
+  );
+  const handlePromoClick = useCallback(() => navigate("/promos"), [navigate]);
+  const createDetailHandler = useCallback((id) => () => navigate(`/pelicula/${id}`), [navigate]);
 
   useEffect(() => {
-    fetch("/data/promos.json")
-      .then((res) => res.json())
+    getPromos()
       .then((data) => setPromos(data))
       .catch(() => setPromos([]));
   }, []);
@@ -19,9 +25,9 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
     <>
       <MovieCarousel peliculas={peliculas} promos={promos} />
       <div className="container">
-        <div style={{ marginBottom: "40px", textAlign: "center" }}>
-          <h1 style={{ fontSize: "2.5rem", marginBottom: "10px" }}>CINEPOLIS</h1>
-          <p style={{ fontSize: "1.2rem", color: "#b0b0b0" }}>
+        <div className={styles.heroTitle}>
+          <h1 className={styles.heroHeading}>CINEPOLIS</h1>
+          <p className={styles.heroSubtitle}>
             Vive la experiencia del cine desde casa
           </p>
         </div>
@@ -35,7 +41,7 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
               title={p.titulo}
               image={p.imagen}
               sinopsis={p.sinopsis}
-              onVerDetalle={() => navigate(`/pelicula/${p.id}`)}
+              onVerDetalle={createDetailHandler(p.id)}
               favoritos={favoritos}
               toggleFavorito={toggleFavorito}
             />
@@ -44,18 +50,16 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
 
         {favoritos?.length > 0 && (
           <>
-            <h2 style={{ marginTop: "60px" }}>Tus favoritas</h2>
+            <h2 className={styles.sectionTitle}>Tus favoritas</h2>
             <div className="grid">
-              {(peliculas || [])
-                .filter((p) => favoritos.includes(p.id))
-                .map((p) => (
+              {favoritas.map((p) => (
                   <MovieCard
                     key={p.id}
                     id={p.id}
                     title={p.titulo}
                     image={p.imagen}
                     sinopsis={p.sinopsis}
-                    onVerDetalle={() => navigate(`/pelicula/${p.id}`)}
+                    onVerDetalle={createDetailHandler(p.id)}
                     favoritos={favoritos}
                     toggleFavorito={toggleFavorito}
                   />
@@ -64,7 +68,7 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
           </>
         )}
 
-        <h2 style={{ marginTop: "60px" }}>Promociones especiales</h2>
+        <h2 className={styles.sectionTitle}>Promociones especiales</h2>
         <div className="grid">
           {promos.length > 0 ? promos.map((promo) => (
             <div className="card" key={promo.id}>
@@ -72,7 +76,7 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
               <div className="card-content">
                 <h3>{promo.titulo}</h3>
                 <p>{promo.descripcion}</p>
-                <button className="btn-secondary" onClick={() => navigate("/promos")}>Ver promoción</button>
+                <button className="btn-secondary" onClick={handlePromoClick}>Ver promoción</button>
               </div>
             </div>
           )) : <p className="loading">Cargando promociones...</p>}

@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
+import { getAlimentos } from "../services/contentService";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
@@ -40,8 +41,7 @@ function MovieCarousel({ peliculas = [], promos = [] }) {
   const [activeTab, setActiveTab] = useState("peliculas");
 
   useEffect(() => {
-    fetch("/data/alimentos.json")
-      .then((res) => res.json())
+    getAlimentos()
       .then((data) => {
         const flattened = data
           .flatMap((seccion) =>

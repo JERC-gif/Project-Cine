@@ -163,6 +163,35 @@ h2::after {
   margin-top: 0.25rem;
 }
 
+.error-boundary-box {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary);
+  color: var(--text-light);
+  font-family: sans-serif;
+}
+
+.error-boundary-title {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.error-boundary-detail {
+  background: var(--dark-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: auto;
+  font-size: 0.85rem;
+  color: #f0f0f0;
+}
+
+.error-boundary-action {
+  margin-top: 1rem;
+}
+
 /* Media queries - Diseño responsivo */
 @media (max-width: 768px) {
   .container {

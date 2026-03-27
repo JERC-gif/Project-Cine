@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
+import { getPromos } from "../../services/contentService";
+import { fallbackPromos } from "../../utils/fallbackData";
 
 function Promos() {
   const [promos, setPromos] = useState([]);
 
   useEffect(() => {
-    fetch("/data/promos.json")
-      .then((res) => res.json())
+    getPromos()
       .then((data) => setPromos(data))
-      .catch(() => setPromos([
-        { id: 1, titulo: "Martes 2x1", descripcion: "Disfruta dos boletos al precio de uno todos los martes.", imagen: "https://via.placeholder.com/400x260/1a1a2e/e50914?text=2x1" },
-        { id: 2, titulo: "Combo Familiar", descripcion: "Ahorra con nuestro combo de palomitas y refrescos para toda la familia.", imagen: "https://via.placeholder.com/400x260/1a1a2e/3b36d1?text=Combo" },
-      ]));
+      .catch(() => setPromos(fallbackPromos));
   }, []);
 
   return (

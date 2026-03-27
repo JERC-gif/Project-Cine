@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import OtherCard from "../components/OtherCard";
+import { OtherCard } from "../../components";
+import { getOtros } from "../../services/contentService";
 
 function Otros() {
   const [activa, setActiva] = useState(null);
   const [opciones, setOpciones] = useState([]);
 
   useEffect(() => {
-    fetch("/data/otros.json")
-      .then((res) => res.json())
+    getOtros()
       .then((data) => setOpciones(data))
-      .catch((err) => console.error("Error cargando opciones:", err));
+      .catch(() => setOpciones([]));
   }, []);
 
   return (
@@ -24,7 +24,7 @@ function Otros() {
               Activar promoción
             </button>
             {activa === item.id && (
-              <p style={{ marginTop: "10px", color: "#4caf50" }}>✅ Promoción activada</p>
+              <p className="promotion-active-message">✅ Promoción activada</p>
             )}
           </div>
         )) : <p className="loading">Cargando opciones...</p>}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
+import { MovieCard } from "../../components";
 
 function Cartelera({ peliculas = [], favoritos, toggleFavorito }) {
   const navigate = useNavigate();
@@ -19,8 +19,7 @@ function Cartelera({ peliculas = [], favoritos, toggleFavorito }) {
         placeholder="Buscar película..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
-        className="search-input"
-        style={{ width: "100%", maxWidth: "500px", margin: "0 auto 30px", display: "block" }}
+        className="search-input search-input-wide"
       />
 
       <div className="grid">

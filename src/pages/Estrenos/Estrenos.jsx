@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import MovieCard from "../components/MovieCard";
+import { MovieCard } from "../../components";
+import { getPeliculas } from "../../services/contentService";
 
 function Estrenos() {
   const navigate = useNavigate();
@@ -8,8 +9,7 @@ function Estrenos() {
   const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
-    fetch("/data/peliculas.json")
-      .then((res) => res.json())
+    getPeliculas()
       .then((data) => setPeliculas(data.slice(0, 6)))
       .catch(() => setPeliculas([]));
   }, []);
@@ -36,7 +36,7 @@ function Estrenos() {
           />
         )) : <p className="loading">Cargando estrenos...</p>}
       </div>
-      <p style={{ marginTop: "1rem" }}>
+      <p className="top-margin-md">
         <Link to="/cartelera" className="footer-link">Ver cartelera completa →</Link>
       </p>
     </div>

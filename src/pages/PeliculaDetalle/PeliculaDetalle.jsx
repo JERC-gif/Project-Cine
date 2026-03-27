@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getPeliculas } from "../../services/contentService";
 
 function PeliculaDetalle() {
   const { id } = useParams();
@@ -13,8 +14,7 @@ function PeliculaDetalle() {
   const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
-    fetch("/data/peliculas.json")
-      .then((res) => res.json())
+    getPeliculas()
       .then((data) => {
         const p = data.find((pel) => pel.id === Number(id));
         setPelicula(p || null);
@@ -41,11 +41,11 @@ function PeliculaDetalle() {
           <div className="detalle-poster detalle-poster-placeholder">🎬 {pelicula.titulo}</div>
         )}
         <div className="card-content detalle-content">
-          <p style={{ fontSize: "1.2rem", lineHeight: "1.8", color: "#e0e0e0" }}>{pelicula.sinopsis}</p>
+          <p className="detalle-sinopsis">{pelicula.sinopsis}</p>
         </div>
       </div>
-      <h3 style={{ marginTop: "40px" }}>Comprar boletos</h3>
-      <form onSubmit={manejarSubmit} style={{ background: "none", padding: 0, border: "none", margin: "20px 0" }}>
+      <h3 className="form-title-spacing">Comprar boletos</h3>
+      <form onSubmit={manejarSubmit} className="ticket-form">
         <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
         <input type="email" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input type="number" placeholder="Cantidad" value={cantidad} onChange={(e) => setCantidad(e.target.value)} required />
@@ -57,7 +57,7 @@ function PeliculaDetalle() {
           <p>Boletos: {ticket.cantidad}</p>
         </div>
       )}
-      <button onClick={() => navigate(-1)} style={{ marginTop: "20px" }}>Volver</button>
+      <button onClick={() => navigate(-1)} className="button-top-spacing">Volver</button>
     </div>
   );
 }

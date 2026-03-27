@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function OtherCard({ title, image }) {
   return (
     <div className="other-card">
@@ -9,4 +11,4 @@ function OtherCard({ title, image }) {
   );
 }
 
-export default OtherCard;
+export default memo(OtherCard);

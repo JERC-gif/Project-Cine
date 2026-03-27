@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import FoodCard from "../components/FoodCard";
+import { FoodCard } from "../../components";
+import { getAlimentos } from "../../services/contentService";
 
 function Alimentos() {
   const [alimentos, setAlimentos] = useState([]);
 
   useEffect(() => {
-    fetch("/data/alimentos.json")
-      .then((res) => res.json())
+    getAlimentos()
       .then((data) => setAlimentos(data))
-      .catch((err) => console.error("Error cargando alimentos:", err));
+      .catch(() => setAlimentos([]));
   }, []);
 
   return (
@@ -20,9 +20,9 @@ function Alimentos() {
           <section key={seccion.categoria} className="food-section">
             <h3 className="food-category">{seccion.categoria}</h3>
             <div className="grid">
-              {seccion.items.map((item, idx) => (
+              {seccion.items.map((item) => (
                 <FoodCard
-                  key={`${seccion.categoria}-${idx}`}
+                  key={`${seccion.categoria}-${item.name}`}
                   name={item.name}
                   price={item.price}
                   image={item.image}

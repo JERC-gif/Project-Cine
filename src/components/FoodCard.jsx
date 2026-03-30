@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 function FoodCard({ name, price, image }) {
   return (
     <div className="food-card">
@@ -12,4 +10,4 @@ function FoodCard({ name, price, image }) {
   );
 }
 
-export default memo(FoodCard);
+export default FoodCard;

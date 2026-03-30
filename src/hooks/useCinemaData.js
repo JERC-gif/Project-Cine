@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getPeliculas } from "../services/contentService";
 
 function useCinemaData() {
@@ -25,9 +25,9 @@ function useCinemaData() {
     };
   }, []);
 
-  const toggleFavorito = useCallback((id) => {
+  const toggleFavorito = (id) => {
     setFavoritos((prev) => (prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]));
-  }, []);
+  };
 
   return { peliculas, favoritos, toggleFavorito };
 }

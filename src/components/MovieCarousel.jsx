@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
@@ -58,34 +58,26 @@ function MovieCarousel({ peliculas = [], promos = [] }) {
       .catch(() => setFoodSlides([]));
   }, []);
 
-  const movies = useMemo(() => {
-    if (peliculas?.length > 0) {
-      return peliculas.map((p) => ({
-        id: p.id,
-        titulo: p.titulo,
-        imagen: p.imagen,
-      }));
-    }
-    return defaultMovies;
-  }, [peliculas]);
+  const movies =
+    peliculas?.length > 0
+      ? peliculas.map((p) => ({
+          id: p.id,
+          titulo: p.titulo,
+          imagen: p.imagen,
+        }))
+      : defaultMovies;
 
-  const promoSlides = useMemo(
-    () =>
-      promos.map((promo) => ({
-        id: promo.id,
-        titulo: promo.titulo,
-        imagen: promo.imagen,
-        subtitulo: promo.descripcion,
-        link: "/promos",
-      })),
-    [promos],
-  );
+  const promoSlides = promos.map((promo) => ({
+    id: promo.id,
+    titulo: promo.titulo,
+    imagen: promo.imagen,
+    subtitulo: promo.descripcion,
+    link: "/promos",
+  }));
 
-  const currentSlides = useMemo(() => {
-    if (activeTab === "promos") return promoSlides;
-    if (activeTab === "alimentos") return foodSlides;
-    return movies;
-  }, [activeTab, movies, promoSlides, foodSlides]);
+  let currentSlides = movies;
+  if (activeTab === "promos") currentSlides = promoSlides;
+  if (activeTab === "alimentos") currentSlides = foodSlides;
 
   const headerTitle =
     activeTab === "promos" ? "Promociones" : activeTab === "alimentos" ? "Alimentos" : "Estrenos";

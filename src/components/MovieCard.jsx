@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 
 function MovieCard({ id, title, image, sinopsis, onVerDetalle, favoritos, toggleFavorito }) {
   const [imgError, setImgError] = useState(false);
@@ -35,4 +35,4 @@ function MovieCard({ id, title, image, sinopsis, onVerDetalle, favoritos, toggle
   );
 }
 
-export default memo(MovieCard);
+export default MovieCard;

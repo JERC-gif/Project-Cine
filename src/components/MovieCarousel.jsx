@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import { getAlimentos } from "../services/contentService";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
 import "./MovieCarousel.css";
 
 const defaultMovies = [
@@ -39,13 +34,18 @@ const defaultMovies = [
 function MovieCarousel({ peliculas = [], promos = [] }) {
   const [foodSlides, setFoodSlides] = useState([]);
   const [activeTab, setActiveTab] = useState("peliculas");
+  const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     getAlimentos()
       .then((data) => {
+        if (!Array.isArray(data)) {
+          setFoodSlides([]);
+          return;
+        }
         const flattened = data
           .flatMap((seccion) =>
-            seccion.items.map((item) => ({
+            (seccion?.items ?? []).map((item) => ({
               id: `${seccion.categoria}-${item.name}`,
               titulo: item.name,
               imagen: item.image,
@@ -67,7 +67,7 @@ function MovieCarousel({ peliculas = [], promos = [] }) {
         }))
       : defaultMovies;
 
-  const promoSlides = promos.map((promo) => ({
+  const promoSlides = (Array.isArray(promos) ? promos : []).map((promo) => ({
     id: promo.id,
     titulo: promo.titulo,
     imagen: promo.imagen,
@@ -86,6 +86,30 @@ function MovieCarousel({ peliculas = [], promos = [] }) {
     if (activeTab === "promos") return slide.link || "/promos";
     if (activeTab === "alimentos") return "/alimentos";
     return `/pelicula/${slide.id}`;
+  };
+
+  const slideCount = currentSlides.length;
+
+  useEffect(() => {
+    setSlideIndex(0);
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (slideCount === 0) return;
+    setSlideIndex((i) => Math.min(i, slideCount - 1));
+  }, [slideCount]);
+
+  useEffect(() => {
+    if (slideCount <= 1) return undefined;
+    const id = setInterval(() => {
+      setSlideIndex((i) => (i + 1) % slideCount);
+    }, 4500);
+    return () => clearInterval(id);
+  }, [slideCount, activeTab]);
+
+  const goSlide = (delta) => {
+    if (slideCount === 0) return;
+    setSlideIndex((i) => (i + delta + slideCount) % slideCount);
   };
 
   return (
@@ -116,47 +140,68 @@ function MovieCarousel({ peliculas = [], promos = [] }) {
           </button>
         </div>
       </div>
-      <Swiper
-        modules={[Navigation, Autoplay, EffectFade]}
-        spaceBetween={10}
-        slidesPerView={1}
-        navigation
-        autoplay={{
-          delay: 4500,
-          disableOnInteraction: false,
-        }}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        speed={800}
-        loop
-        grabCursor
-        className="movie-carousel"
-      >
-        {currentSlides.map((slide) => (
-          <SwiperSlide key={slide.id}>
-            <Link to={resolveLink(slide)} className="carousel-slide-link">
+      {slideCount === 0 ? (
+        <p className="loading carousel-empty">
+          {activeTab === "promos"
+            ? "Cargando promociones…"
+            : activeTab === "alimentos"
+              ? "Sin contenido de alimentos por ahora."
+              : "Cargando…"}
+        </p>
+      ) : (
+        <div className="movie-carousel movie-carousel-simple">
+          <div className="movie-carousel-viewport">
+            {currentSlides.map((slide, i) => (
               <div
-                className="carousel-slide-bg"
-                style={{ backgroundImage: `url(${slide.imagen})` }}
-              />
-              <div className="carousel-slide-overlay" />
-              <div className="carousel-slide-content">
-                <h3 className="carousel-slide-title">{slide.titulo}</h3>
-                {slide.subtitulo && (
-                  <p className="carousel-slide-subtitle">{slide.subtitulo}</p>
-                )}
-                <span className="carousel-slide-cta">
-                  {activeTab === "promos"
-                    ? "Ver promoción"
-                    : activeTab === "alimentos"
-                      ? "Ver alimentos"
-                      : "Ver detalle"}
-                </span>
+                key={slide.id}
+                className={`carousel-slide-pane ${i === slideIndex ? "is-active" : ""}`}
+                aria-hidden={i !== slideIndex}
+              >
+                <Link to={resolveLink(slide)} className="carousel-slide-link">
+                  <div
+                    className="carousel-slide-bg"
+                    style={{ backgroundImage: `url(${slide.imagen})` }}
+                  />
+                  <div className="carousel-slide-overlay" />
+                  <div className="carousel-slide-content">
+                    <h3 className="carousel-slide-title">{slide.titulo}</h3>
+                    {slide.subtitulo && (
+                      <p className="carousel-slide-subtitle">{slide.subtitulo}</p>
+                    )}
+                    <span className="carousel-slide-cta">
+                      {activeTab === "promos"
+                        ? "Ver promoción"
+                        : activeTab === "alimentos"
+                          ? "Ver alimentos"
+                          : "Ver detalle"}
+                    </span>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            ))}
+          </div>
+          {slideCount > 1 && (
+            <>
+              <button
+                type="button"
+                className="carousel-nav carousel-nav-prev"
+                onClick={() => goSlide(-1)}
+                aria-label="Diapositiva anterior"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="carousel-nav carousel-nav-next"
+                onClick={() => goSlide(1)}
+                aria-label="Diapositiva siguiente"
+              >
+                ›
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </section>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MovieCard } from "../../components";
 
-function Cartelera({ peliculas = [], favoritos, toggleFavorito }) {
+function Cartelera({ peliculas = [], favoritos = [], toggleFavorito }) {
   const navigate = useNavigate();
   const [busqueda, setBusqueda] = useState("");
 

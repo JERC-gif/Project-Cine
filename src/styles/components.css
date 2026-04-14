@@ -240,40 +240,61 @@ a.btn.btn-secondary:hover {
 }
 
 /* Detalle de película - layout responsivo */
+/* .card img usa width:100% y gana a .detalle-poster; aquí forzamos medidas del póster
+   para que la sinopsis reciba el resto del ancho (usabilidad: legibilidad y jerarquía). */
 .detalle-card {
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
+  flex-wrap: wrap;
 }
 
-.detalle-poster {
-  width: 300px;
-  min-width: 300px;
-  height: 450px;
+.detalle-card > img.detalle-poster {
+  width: clamp(220px, 32vw, 320px);
+  min-width: 200px;
+  max-width: 42%;
+  height: auto;
+  min-height: 380px;
+  max-height: 520px;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
+  flex: 0 0 auto;
   border-radius: 12px 0 0 12px;
 }
 
-.detalle-poster-placeholder {
+.detalle-card > .detalle-poster-placeholder {
+  width: clamp(220px, 32vw, 320px);
+  min-width: 200px;
+  max-width: 42%;
+  min-height: 380px;
+  aspect-ratio: 2 / 3;
+  flex: 0 0 auto;
+  border-radius: 12px 0 0 12px;
   background: linear-gradient(135deg, #3b36d1, #1a1a2e);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: clamp(1rem, 3vw, 1.8rem);
   text-align: center;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .detalle-content {
-  flex: 1;
-  padding: 30px;
+  flex: 1 1 0;
+  min-width: min(100%, 280px);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .detalle-sinopsis {
-  font-size: 1.2rem;
-  line-height: 1.8;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.75;
   color: #e0e0e0;
+  max-width: 65ch;
 }
 
 .form-title-spacing {
@@ -294,20 +315,34 @@ a.btn.btn-secondary:hover {
 @media (max-width: 768px) {
   .detalle-card {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .detalle-poster {
+  .detalle-card > img.detalle-poster {
     width: 100%;
-    min-width: auto;
-    height: 400px;
+    max-width: none;
+    min-width: 0;
+    min-height: 280px;
+    max-height: 420px;
+    aspect-ratio: 16 / 9;
     border-radius: 12px 12px 0 0;
   }
 
-  .detalle-poster-placeholder {
+  .detalle-card > .detalle-poster-placeholder {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 200px;
+    aspect-ratio: 16 / 9;
     border-radius: 12px 12px 0 0;
   }
 
   .detalle-content {
-    padding: 20px;
+    padding: 1.25rem;
+    min-width: 0;
+  }
+
+  .detalle-sinopsis {
+    max-width: none;
   }
 }

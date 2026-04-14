@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-function MovieCard({ id, title, image, sinopsis, onVerDetalle, favoritos, toggleFavorito }) {
+function MovieCard({ id, title, image, sinopsis = "", onVerDetalle, favoritos = [], toggleFavorito }) {
   const [imgError, setImgError] = useState(false);
   const esFavorito = favoritos.includes(id);
+  const resumen = sinopsis.length > 120 ? `${sinopsis.substring(0, 120)}...` : sinopsis;
 
   return (
     <div className="card">
@@ -19,7 +20,7 @@ function MovieCard({ id, title, image, sinopsis, onVerDetalle, favoritos, toggle
       )}
       <div className="card-content">
         <h3>{title}</h3>
-        <p>{sinopsis.substring(0, 120)}...</p>
+        <p>{resumen}</p>
 
         <div className="card-actions">
           <button onClick={onVerDetalle}>Ver detalle</button>

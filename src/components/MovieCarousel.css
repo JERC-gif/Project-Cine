@@ -54,12 +54,37 @@
   box-shadow: var(--shadow-hover);
 }
 
-.movie-carousel .swiper-wrapper {
-  align-items: stretch;
+.carousel-empty {
+  padding: 2rem;
+  text-align: center;
 }
 
-.movie-carousel .swiper-slide {
+/* Carrusel sin Swiper (evita conflictos con React 19 / primer render en blanco) */
+.movie-carousel-simple {
+  position: relative;
+}
+
+.movie-carousel-viewport {
+  position: relative;
   height: 420px;
+  width: 100%;
+}
+
+.carousel-slide-pane {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.carousel-slide-pane.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1;
 }
 
 .carousel-slide-link {
@@ -138,42 +163,44 @@
   text-decoration: underline;
 }
 
-/* Botones de navegación Swiper */
-.movie-carousel .swiper-button-prev,
-.movie-carousel .swiper-button-next {
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
   width: 48px;
   height: 48px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.4);
   background: rgba(15, 15, 26, 0.7);
   color: white;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
-.movie-carousel .swiper-button-prev:hover,
-.movie-carousel .swiper-button-next:hover {
+.carousel-nav:hover {
   background: var(--primary);
   border-color: var(--primary);
-  transform: scale(1.08);
+  transform: translateY(-50%) scale(1.08);
 }
 
-.movie-carousel .swiper-button-prev {
+.carousel-nav-prev {
   left: 16px;
 }
 
-.movie-carousel .swiper-button-next {
+.carousel-nav-next {
   right: 16px;
 }
 
-.movie-carousel .swiper-button-prev::after,
-.movie-carousel .swiper-button-next::after {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 @media (max-width: 768px) {
-  .movie-carousel .swiper-slide {
+  .movie-carousel-viewport {
     height: 320px;
   }
 
@@ -181,17 +208,17 @@
     font-size: 1.5rem;
   }
 
-  .movie-carousel .swiper-button-prev,
-  .movie-carousel .swiper-button-next {
+  .carousel-nav {
     width: 40px;
     height: 40px;
+    font-size: 1.4rem;
   }
 
-  .movie-carousel .swiper-button-prev {
+  .carousel-nav-prev {
     left: 8px;
   }
 
-  .movie-carousel .swiper-button-next {
+  .carousel-nav-next {
     right: 8px;
   }
 }

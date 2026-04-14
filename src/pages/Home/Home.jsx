@@ -4,7 +4,7 @@ import { MovieCard, MovieCarousel } from "../../components";
 import { getPromos } from "../../services/contentService";
 import styles from "./Home.module.css";
 
-function Home({ peliculas, favoritos, toggleFavorito }) {
+function Home({ peliculas, favoritos = [], toggleFavorito }) {
   const navigate = useNavigate();
   const [promos, setPromos] = useState([]);
 
@@ -13,7 +13,7 @@ function Home({ peliculas, favoritos, toggleFavorito }) {
 
   useEffect(() => {
     getPromos()
-      .then((data) => setPromos(data))
+      .then((data) => setPromos(Array.isArray(data) ? data : []))
       .catch(() => setPromos([]));
   }, []);
 
